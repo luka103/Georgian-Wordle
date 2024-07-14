@@ -35,7 +35,7 @@ function toggleMusic() {
     musicPlaying = !musicPlaying;
 }
 
-fetch('words.txt')
+fetch('./words/words.txt')
     .then(response => response.text())
     .then(text => {
         words = text.split('\n').map(line => line.split(' ')[0].trim()).filter(word => word.length === 5);
