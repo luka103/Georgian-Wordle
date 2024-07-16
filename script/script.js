@@ -16,8 +16,8 @@ const backgroundMusic = document.getElementById('background-music');
 const musicOn = document.getElementById('music-on');
 const musicOff = document.getElementById('music-off');
 
-
 let musicPlaying = true;
+
 
 musicOn.addEventListener('click', toggleMusic);
 musicOff.addEventListener('click', toggleMusic);
@@ -35,11 +35,16 @@ function toggleMusic() {
     musicPlaying = !musicPlaying;
 }
 
+
 fetch('./words/words.txt')
     .then(response => response.text())
     .then(text => {
-        words = text.split('\n').map(line => line.split(' ')[0].trim()).filter(word => word.length === 5);
+
+        words = text.split('\n').map(word => word.trim()).filter(word => word.length === 5);
         startGame();
+    })
+    .catch(error => {
+        console.error('Error loading words:', error);
     });
 
 function startGame() {
@@ -60,22 +65,25 @@ function startGame() {
         }
     }
 
-    submitButton.disabled = false; 
+    submitButton.disabled = false;
 }
+
 
 submitButton.addEventListener('click', () => {
     if (gameEnded) return; 
 
+
+    
     const guess = input.value.trim().toLowerCase();
 
     if (guess.length !== currentWord.length) {
-        message.textContent = `Your guess must be ${currentWord.length} letters long.`;
+        message.textContent = `სიტყვა უნდა იყოს ${currentWord.length} ასოიანი`;
         incorrectSound.play();
         return;
     }
 
     if (!words.includes(guess)) {
-        message.textContent = 'The guessed word is not in the word list.';
+        message.textContent = 'შეყვანილი სიტყვა არ არსებობს';
         incorrectSound.play();
         return;
     }
@@ -117,32 +125,38 @@ submitButton.addEventListener('click', () => {
     guessSound.play();
 
     if (guess === currentWord) {
-        message.textContent = 'გილოცავთ! თქვენ გამოიცანით!';
+        message.textContent = 'გილოცავთ! თქვენ გამოიცანით';
         correctSound.play();
         confettiEffect();
-        submitButton.disabled = true; 
+        submitButton.disabled = true;
         gameEnded = true;
     } else {
         message.textContent = '';
         if (currentRow < 5) {
             currentRow++;
         } else {
-            message.textContent = `წააგეთ! სიტყვა იყო ${currentWord}`;
+            message.textContent = `წააგეთ! სიტყვა იყო ${currentWord}.`;
             incorrectSound.play();
             gameEnded = true;
         }
     }
 
+
+
     input.value = '';
+
 });
+
 
 newWordButton.addEventListener('click', () => {
     startGame();
 });
 
+
 revealWordButton.addEventListener('click', () => {
-    message.textContent = `The word was: ${currentWord}`;
+    message.textContent = `სიტყვა იყო: ${currentWord}`;
 });
+
 
 function updateBoard(word) {
     board.innerHTML = '';
@@ -159,6 +173,7 @@ function updateBoard(word) {
     }
 }
 
+
 function clearBoard() {
     const cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
@@ -169,6 +184,7 @@ function clearBoard() {
         }, 500);
     });
 }
+
 
 function confettiEffect() {
     confetti({
