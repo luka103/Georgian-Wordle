@@ -2,6 +2,8 @@ let words = [];
 let currentWord = '';
 let currentRow = 0;
 let gameEnded = false;
+let timerInterval;
+let timeRemaining = 60;
 
 const board = document.getElementById('board');
 const input = document.getElementById('guess-input');
@@ -15,9 +17,10 @@ const guessSound = document.getElementById('guess-sound');
 const backgroundMusic = document.getElementById('background-music');
 const musicOn = document.getElementById('music-on');
 const musicOff = document.getElementById('music-off');
+const timerDisplay = document.getElementById('timer');
+const hourglass = document.getElementById('hourglass');
 
 let musicPlaying = true;
-
 
 musicOn.addEventListener('click', toggleMusic);
 musicOff.addEventListener('click', toggleMusic);
@@ -35,11 +38,9 @@ function toggleMusic() {
     musicPlaying = !musicPlaying;
 }
 
-
 fetch('./words/words.txt')
     .then(response => response.text())
     .then(text => {
-
         words = text.split('\n').map(word => word.trim()).filter(word => word.length === 5);
         startGame();
     })
@@ -48,6 +49,11 @@ fetch('./words/words.txt')
     });
 
 function startGame() {
+    clearInterval(timerInterval);
+    timeRemaining = 60;
+    timerDisplay.textContent = `დრო: ${timeRemaining} წმ`;
+    hourglass.src = './img/hourglass.gif';
+
     currentWord = words[Math.floor(Math.random() * words.length)];
     message.textContent = '';
     input.value = '';
@@ -66,14 +72,33 @@ function startGame() {
     }
 
     submitButton.disabled = false;
+    startTimer();
 }
 
+function startTimer() {
+    timerInterval = setInterval(() => {
+        if (timeRemaining > 0) {
+            timeRemaining--;
+            timerDisplay.textContent = `დრო: ${timeRemaining} წმ`;
+        } else {
+            clearInterval(timerInterval);
+            gameEnded = true;
+            message.textContent = `დრო გავიდა, სიტყვა იყო: ${currentWord}`;
+            incorrectSound.play();
+            submitButton.disabled = true;
+            hourglass.src = './img/hourglass_static.png';
+        }
+    }, 1000);
+}
+
+function stopSound(sound) {
+    sound.pause();
+    sound.currentTime = 0;
+}
 
 submitButton.addEventListener('click', () => {
-    if (gameEnded) return; 
+    if (gameEnded) return;
 
-
-    
     const guess = input.value.trim().toLowerCase();
 
     if (guess.length !== currentWord.length) {
@@ -126,65 +151,36 @@ submitButton.addEventListener('click', () => {
 
     if (guess === currentWord) {
         message.textContent = 'გილოცავთ! თქვენ გამოიცანით';
+        stopSound(guessSound);
         correctSound.play();
         confettiEffect();
         submitButton.disabled = true;
         gameEnded = true;
+        clearInterval(timerInterval);
+        hourglass.src = './img/hourglass_static.png';
     } else {
         message.textContent = '';
         if (currentRow < 5) {
             currentRow++;
         } else {
-            message.textContent = `წააგეთ! სიტყვა იყო ${currentWord}.`;
+            message.textContent = `წააგეთ! სიტყვა იყო ${currentWord}`;
             incorrectSound.play();
             gameEnded = true;
+            clearInterval(timerInterval);
+            hourglass.src = './img/hourglass_static.png';
         }
     }
 
-
-
     input.value = '';
-
 });
-
 
 newWordButton.addEventListener('click', () => {
     startGame();
 });
 
-
 revealWordButton.addEventListener('click', () => {
     message.textContent = `სიტყვა იყო: ${currentWord}`;
 });
-
-
-function updateBoard(word) {
-    board.innerHTML = '';
-
-    for (let i = 0; i < word.length; i++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
-        cell.textContent = word[i];
-        board.appendChild(cell);
-
-        setTimeout(() => {
-            cell.classList.add('fadeIn');
-        }, i * 100);
-    }
-}
-
-
-function clearBoard() {
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach(cell => {
-        cell.classList.remove('fadeIn');
-        cell.classList.add('fadeOut');
-        setTimeout(() => {
-            cell.remove();
-        }, 500);
-    });
-}
-
 
 function confettiEffect() {
     confetti({

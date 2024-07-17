@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ქართული Wordle</title>
+    <link rel="icon" href="./img/icon.svg" type="image/png">
     <link rel="stylesheet" href="./css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -14,6 +15,11 @@
 </head>
 <body>
     <h1>ქართული Wordle</h1>
+    <div id="timer-container">
+        <div id="timer">Time: 60s</div>
+        <img id="hourglass" src="./img/hourglass.gif" alt="Hourglass">
+    </div>
+    
     <div id="game-container">
         <div id="board"></div>
         <div id="guess-section">

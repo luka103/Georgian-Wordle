@@ -21,6 +21,24 @@ h1 {
     text-align: center;
 }
 
+#timer {
+    margin-bottom: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#timer-container {
+    display: flex;
+    align-items: center;
+}
+
+#hourglass {
+    width: 24px; 
+    height: 24px;
+    margin-bottom: 10px;
+}
+
+
 #board {
     display: grid;
     gap: 5px;
