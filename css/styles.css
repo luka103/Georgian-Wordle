@@ -14,10 +14,10 @@ body {
 .logo {
     width: 150px;
     height: 150px;
-    border: none;
+    /* border: none;
     background: url("../img/logo.png") no-repeat center center;
     background-size: cover;
-    cursor: pointer;
+    cursor: pointer; */
 }
 
 h1 {
