@@ -131,7 +131,7 @@ function getCurrentGuess() {
 }
 
 
-document.getElementById('redirect-button').addEventListener('click', function() {
-    window.open('https://viskonti-manga.netlify.app/', '_blank'); 
-});
+// document.getElementById('redirect-button').addEventListener('click', function() {
+//     window.open('https://viskonti-manga.netlify.app/', '_blank'); 
+// });
 
