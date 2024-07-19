@@ -38,7 +38,7 @@ function handleKeyboardClick(key) {
 }
 
 function handleLetterInput(letter) {
-    if (!keyboardEnabled) return; // Check if the keyboard is enabled
+    if (!keyboardEnabled) return; 
 
     const cells = document.querySelectorAll('#board .cell');
     const startIndex = currentRow * currentWord.length;
@@ -51,12 +51,12 @@ function handleLetterInput(letter) {
     }
 
     if (!timerStarted) {
-        startTimer(); // Start the timer when the first letter is input
+        startTimer(); 
     }
 }
 
 function handleDelete() {
-    if (!keyboardEnabled) return; // Check if the keyboard is enabled
+    if (!keyboardEnabled) return; 
 
     const cells = document.querySelectorAll('#board .cell');
     const startIndex = currentRow * currentWord.length;
@@ -68,7 +68,7 @@ function handleDelete() {
     }
 
     if (!timerStarted) {
-        startTimer(); // Start the timer when the first delete is pressed
+        startTimer(); 
     }
 }
 

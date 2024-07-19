@@ -54,16 +54,16 @@ fetch('./words/words.txt')
         clearInterval(timerInterval);
         timeRemaining = 60;
         timerDisplay.textContent = `დრო: ${timeRemaining} წმ`;
-        hourglass.src = './img/hourglass_static.png'; // Set to static image initially
+        hourglass.src = './img/hourglass_static.png';
     
         currentWord = words[Math.floor(Math.random() * words.length)];
         message.textContent = '';
         currentRow = 0;
-        currentCellIndex = 0; // Reset currentCellIndex to 0
+        currentCellIndex = 0; 
         gameEnded = false;
         board.innerHTML = '';
         board.style.gridTemplateColumns = `repeat(${currentWord.length}, 60px)`;
-        timerStarted = false; // Reset timerStarted flag
+        timerStarted = false; 
     
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < currentWord.length; j++) {
@@ -74,7 +74,7 @@ fetch('./words/words.txt')
         }
     
         submitButton.disabled = false;
-        keyboardEnabled = true; // Enable the keyboard
+        keyboardEnabled = true;
         console.log(currentWord);
     }
     
@@ -82,7 +82,7 @@ fetch('./words/words.txt')
 
     function startTimer() {
         if (!timerStarted) {
-            hourglass.src = './img/hourglass.gif'; // Change to GIF when timer starts
+            hourglass.src = './img/hourglass.gif'; 
             timerInterval = setInterval(() => {
                 if (timeRemaining > 0) {
                     timeRemaining--;
@@ -96,7 +96,7 @@ fetch('./words/words.txt')
                     hourglass.src = './img/hourglass_static.png';
                 }
             }, 1000);
-            timerStarted = true; // Mark timer as started
+            timerStarted = true; 
         }
     }
     
@@ -132,6 +132,6 @@ function getCurrentGuess() {
 
 
 document.getElementById('redirect-button').addEventListener('click', function() {
-    window.open('https://viskonti-manga.netlify.app/', '_blank'); // Opens the link in a new tab
+    window.open('https://viskonti-manga.netlify.app/', '_blank'); 
 });
 

@@ -71,48 +71,47 @@ h1 {
 }
 
 .keyboard {
-    max-width: 600px; /* Adjust width as needed */
+    max-width: 600px; 
     margin: 0 auto;
 }
 
 #georgian-keyboard {
     display: flex;
-    flex-direction: column; /* Stack rows vertically */
-    align-items: center; /* Center rows horizontally */
-    gap: 10px; /* Space between rows */
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px; 
 }
 
-/* Style for each keyboard row */
+
 .keyboard-row {
     display: flex;
-    justify-content: center; /* Center keys horizontally */
-    width: 100%; /* Ensure rows take full width of the container */
+    justify-content: center; 
+    width: 100%; 
 }
 
-/* Style for each key */
 .keyboard-key {
-    flex: 1; /* Make keys grow to take available space */
-    margin: 2px; /* Space around keys */
+    flex: 1;
+    margin: 2px;
     padding: 10px;
     font-size: 16px;
     text-align: center;
-    background-color: #818384; /* Background color of keys */
-    border: 1px solid #818384; /* Border around keys */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #818384; 
+    border: 1px solid #818384; 
+    border-radius: 5px; 
+    cursor: pointer; 
     color: #d7dadc;
     font-family: bold;
 }
 
 .keyboard-key:hover {
-    background-color: #9c9d9e; /* Darker background on hover */
+    background-color: #9c9d9e; 
     color: #000;
 }
 
 .keyboard-key.large {
-    width: 60px; /* Larger width for second and third row keys */
-    height: 60px; /* Larger height for second and third row keys */
-    font-size: 24px; /* Larger font size for second and third row keys */
+    width: 60px; 
+    height: 60px; 
+    font-size: 24px; 
 }
 
 
@@ -184,10 +183,10 @@ button:hover {
 }
 
 #music-control {
-    position: fixed; /* Use fixed positioning to keep it in place */
-    top: 20px; /* Distance from the top */
-    right: 20px; /* Distance from the right */
-    z-index: 1000; /* Ensure it stays on top of other content */
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    z-index: 1000; 
 }
 
 .music-icon {
