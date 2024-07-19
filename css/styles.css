@@ -8,7 +8,16 @@ body {
     justify-content: center; 
     height: auto;
     margin: 0;
-    padding: 20px 0;
+    padding: 0;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    border: none;
+    background: url('/img/logo.png') no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
 }
 
 h1 {
@@ -61,29 +70,65 @@ h1 {
     transition: background-color 0.3s, border 0.3s;
 }
 
-#guess-section {
-    margin-bottom: 20px;
+.keyboard {
+    max-width: 600px; /* Adjust width as needed */
+    margin: 0 auto;
 }
 
-#guess-input {
-    width: 300px;
-    padding: 10px;
-    font-size: 1.2em;
-    border: 2px solid #3a3a3c;
-    border-radius: 5px;
-    background-color: #121213;
-    color: #ffffff;
-    text-transform: uppercase;
+#georgian-keyboard {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    align-items: center; /* Center rows horizontally */
+    gap: 10px; /* Space between rows */
 }
+
+/* Style for each keyboard row */
+.keyboard-row {
+    display: flex;
+    justify-content: center; /* Center keys horizontally */
+    width: 100%; /* Ensure rows take full width of the container */
+}
+
+/* Style for each key */
+.keyboard-key {
+    flex: 1; /* Make keys grow to take available space */
+    margin: 2px; /* Space around keys */
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    background-color: #818384; /* Background color of keys */
+    border: 1px solid #818384; /* Border around keys */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    color: #d7dadc;
+    font-family: bold;
+}
+
+.keyboard-key:hover {
+    background-color: #9c9d9e; /* Darker background on hover */
+    color: #000;
+}
+
+.keyboard-key.large {
+    width: 60px; /* Larger width for second and third row keys */
+    height: 60px; /* Larger height for second and third row keys */
+    font-size: 24px; /* Larger font size for second and third row keys */
+}
+
+
+.key:hover {
+    background-color: #e0e0e0;
+}
+
 
 #button-section {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-button {
+.button {
     padding: 10px 20px;
     font-size: 1.2em;
     border: none;
@@ -103,13 +148,6 @@ button {
     background-color: #3a6b35;
 }
 
-#reveal-word {
-    background-color: #e07a5f;
-}
-
-#reveal-word:hover {
-    background-color: #b65b45;
-}
 
 #new-word {
     background-color: #4a90e2;
@@ -146,23 +184,22 @@ button:hover {
 }
 
 #music-control {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    position: fixed; /* Use fixed positioning to keep it in place */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    z-index: 1000; /* Ensure it stays on top of other content */
 }
 
 .music-icon {
-    width: 40px; 
+    width: 50px;
+    height: 50px;
     cursor: pointer;
 }
 
 #music-on {
-    display: none; 
+    display: none;
 }
 
 #music-off {
-    display: inline; 
+    display: inline;
 }
-
-
-
