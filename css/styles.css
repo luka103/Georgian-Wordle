@@ -15,7 +15,7 @@ body {
     width: 150px;
     height: 150px;
     border: none;
-    background: url('./img/logo.png') no-repeat center center;
+    background: url("../img/logo.png") no-repeat center center;
     background-size: cover;
     cursor: pointer;
 }
