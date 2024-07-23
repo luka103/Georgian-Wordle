@@ -15,29 +15,64 @@ const revealWordButton = document.getElementById('reveal-word');
 const correctSound = document.getElementById('correct-sound');
 const incorrectSound = document.getElementById('incorrect-sound');
 const guessSound = document.getElementById('guess-sound');
-const backgroundMusic = document.getElementById('background-music');
-const musicOn = document.getElementById('music-on');
-const musicOff = document.getElementById('music-off');
 const timerDisplay = document.getElementById('timer');
 const hourglass = document.getElementById('hourglass');
+const audioPlayer = document.getElementById('audio-player');
+const songList = document.getElementById('song-list');
+const muteIcon = document.getElementById('mute-icon');
+const playlistToggle = document.getElementById('playlist-toggle');
+const arrowIcon = document.getElementById('arrow-icon');
+let currentSongIndex = 0; // Keep track of the current song index
 
-
-let musicPlaying = true;
-
-musicOn.addEventListener('click', toggleMusic);
-musicOff.addEventListener('click', toggleMusic);
-
-function toggleMusic() {
-    if (musicPlaying) {
-        backgroundMusic.pause();
-        musicOn.style.display = 'none';
-        musicOff.style.display = 'inline';
+playlistToggle.addEventListener('click', () => {
+    if (songList.style.display === 'none' || songList.style.display === '') {
+        songList.style.display = 'block';
+        arrowIcon.textContent = '▲'; // Change to up arrow
     } else {
-        backgroundMusic.play();
-        musicOn.style.display = 'inline';
-        musicOff.style.display = 'none';
+        songList.style.display = 'none';
+        arrowIcon.textContent = '▼'; // Change to down arrow
     }
-    musicPlaying = !musicPlaying;
+});
+
+songList.addEventListener('click', (event) => {
+    if (event.target && event.target.matches('div[data-song]')) {
+        const song = event.target.getAttribute('data-song');
+        if (song) {
+            playSong(song);
+            currentSongIndex = Array.from(songList.children).indexOf(event.target); // Update the current song index
+            songList.style.display = 'none'; // Hide the dropdown after selection
+            arrowIcon.textContent = '▼'; // Change to down arrow
+        }
+    }
+});
+
+muteIcon.addEventListener('click', () => {
+    if (audioPlayer.muted) {
+        audioPlayer.muted = false;
+        muteIcon.src = './img/music-on.svg'; // Replace with the path to your unmute icon
+    } else {
+        audioPlayer.muted = true;
+        muteIcon.src = './img/music-off.png'; // Replace with the path to your mute icon
+    }
+});
+
+audioPlayer.addEventListener('ended', () => {
+    currentSongIndex = (currentSongIndex + 1) % songList.children.length; // Loop to the next song
+    const nextSongElement = songList.children[currentSongIndex];
+    const nextSong = nextSongElement.getAttribute('data-song');
+    if (nextSong) {
+        playSong(nextSong);
+    }
+});
+
+function playSong(song) {
+    audioPlayer.src = song;
+    audioPlayer.play();
+}
+
+// Optionally, start with a selected song if desired
+if (songList.querySelector('div[data-song]')) {
+    playSong(songList.querySelector('div[data-song]').getAttribute('data-song'));
 }
 
 fetch('./words/words.txt')

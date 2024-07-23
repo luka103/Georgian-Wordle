@@ -40,13 +40,24 @@
     <audio id="correct-sound" src="./mp3/correct.mp3"></audio>
     <audio id="incorrect-sound" src="./mp3/incorrect.mp3"></audio>
     <audio id="guess-sound" src="./mp3/guess.mp3"></audio>
-    <audio id="background-music" src="./mp3/background-music.mp3" loop></audio>
 
-    <div id="music-control">
-        <img id="music-on" class="music-icon" src="./img/music-on.svg" alt="Music On">
-        <img id="music-off" class="music-icon" src="./img/music-off.png" alt="Music Off">
+    <div id="music-controls">
+        <div id="playlist-toggle">
+            PlayList 
+            <span id="arrow-icon">▼</span>
+        </div>
+        <div id="song-list" class="hidden">
+            <div data-song="" class="non-selectable">Select Song</div>
+            <div data-song="./mp3/jjk.mp3" loop>Song 1</div>
+            <div data-song="./mp3/poker.mp3">Song 2</div>
+            <div data-song="./mp3/lashkruli.mp3">Song 3</div>
+        </div>
+        <img id="mute-icon" src="./img/music-on.svg" alt="Mute" />
     </div>
-
+    <audio id="audio-player" src=""></audio>
+    
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script src="./script/script.js"></script>
     <script src="./script/keyboard.js"></script>

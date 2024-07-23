@@ -202,23 +202,70 @@ button:hover {
     border-color: #3a3a3c;
 }
 
-#music-control {
-    position: fixed; 
-    top: 20px; 
-    right: 20px; 
-    z-index: 1000; 
+#music-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: black; /* Match the background color */
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
-.music-icon {
-    width: 50px;
-    height: 50px;
+#playlist-toggle {
+    cursor: pointer;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#arrow-icon {
+    margin-left: 5px;
+}
+
+#song-list {
+    display: none; /* Hide by default */
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+#song-list div {
+    padding: 5px;
     cursor: pointer;
 }
 
-#music-on {
+#song-list div:hover {
+    background-color: #ddd;
+}
+
+.hidden {
     display: none;
 }
 
-#music-off {
-    display: inline;
+#mute-icon {
+    cursor: pointer;
+    width: 30px; /* Adjust the size as needed */
+    height: 30px; /* Adjust the size as needed */
+    filter: invert(100%); /* This makes the icon white */
 }
+
+.non-selectable {
+    cursor: default !important;
+    color: gray; /* Optional: change color to indicate it's non-selectable */
+}
+
+.non-selectable:hover {
+    background-color: white !important;
+}
+
