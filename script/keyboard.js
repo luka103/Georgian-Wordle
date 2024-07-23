@@ -18,12 +18,14 @@ function createGeorgianKeyboard() {
             const keyButton = document.createElement('button');
             keyButton.textContent = key;
             keyButton.classList.add('keyboard-key');
+            keyButton.setAttribute('data-key', key);
             keyButton.addEventListener('click', () => handleKeyboardClick(key));
             rowDiv.appendChild(keyButton);
         });
         keyboardContainer.appendChild(rowDiv);
     });
 }
+
 
 function handleKeyboardClick(key) {
     if (!keyboardEnabled) return;
@@ -74,7 +76,6 @@ function handleDelete() {
 
 
 function handleSubmit() {
-    
     if (gameEnded) return;
 
     const guess = getCurrentGuess();
@@ -103,10 +104,15 @@ function handleSubmit() {
 
     for (let i = 0; i < guessArray.length; i++) {
         const cell = board.children[currentRow * currentWord.length + i];
+        const keyButton = document.querySelector(`.keyboard-key[data-key="${guessArray[i]}"]`);
         cell.textContent = guessArray[i];
 
         if (guessArray[i] === currentWord[i]) {
             cell.classList.add('correct');
+            if (keyButton) {
+                keyButton.classList.remove('present', 'absent'); 
+                keyButton.classList.add('correct');
+            }
             letterCounts[guessArray[i]]--;
             correctLetters++;
         }
@@ -114,13 +120,21 @@ function handleSubmit() {
 
     for (let i = 0; i < guessArray.length; i++) {
         const cell = board.children[currentRow * currentWord.length + i];
+        const keyButton = document.querySelector(`.keyboard-key[data-key="${guessArray[i]}"]`);
 
         if (!cell.classList.contains('correct')) {
             if (currentWordArray.includes(guessArray[i]) && letterCounts[guessArray[i]] > 0) {
                 cell.classList.add('present');
+                if (keyButton && !keyButton.classList.contains('correct')) {
+                    keyButton.classList.remove('absent'); 
+                    keyButton.classList.add('present');
+                }
                 letterCounts[guessArray[i]]--;
             } else {
                 cell.classList.add('absent');
+                if (keyButton && !keyButton.classList.contains('correct')) {
+                    keyButton.classList.add('absent');
+                }
             }
         }
     }
@@ -152,6 +166,8 @@ function handleSubmit() {
         }
     }
 }
+
+
 
 
 function handleRealKeyboardPress(event) {

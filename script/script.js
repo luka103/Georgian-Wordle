@@ -54,7 +54,7 @@ fetch('./words/words.txt')
         clearInterval(timerInterval);
         timeRemaining = 60;
         timerDisplay.textContent = `დრო: ${timeRemaining} წმ`;
-        hourglass.src = './img/hourglass_static.png';
+        hourglass.src = './img/hourglass_static.png'; 
     
         currentWord = words[Math.floor(Math.random() * words.length)];
         message.textContent = '';
@@ -65,6 +65,11 @@ fetch('./words/words.txt')
         board.style.gridTemplateColumns = `repeat(${currentWord.length}, 60px)`;
         timerStarted = false; 
     
+        const keyButtons = document.querySelectorAll('.keyboard-key');
+        keyButtons.forEach(button => {
+            button.classList.remove('correct', 'present', 'absent');
+        });
+    
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < currentWord.length; j++) {
                 const cell = document.createElement('div');
@@ -74,11 +79,9 @@ fetch('./words/words.txt')
         }
     
         submitButton.disabled = false;
-        keyboardEnabled = true;
+        keyboardEnabled = true; 
         console.log(currentWord);
     }
-    
-    
 
     function startTimer() {
         if (!timerStarted) {
@@ -94,6 +97,7 @@ fetch('./words/words.txt')
                     incorrectSound.play();
                     submitButton.disabled = true;
                     hourglass.src = './img/hourglass_static.png';
+                    keyboardEnabled = false;
                 }
             }, 1000);
             timerStarted = true; 
